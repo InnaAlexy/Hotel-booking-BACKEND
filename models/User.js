@@ -15,12 +15,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: roles.GEST,
   },
-  bookings: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Booking",
-    },
-  ],
 });
 
 const User = mongoose.model("User", UserSchema);
