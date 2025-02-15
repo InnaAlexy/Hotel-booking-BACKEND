@@ -7,7 +7,8 @@ async function addBooking(booking) {
   const newBooking = await Booking.create(booking);
 
   // await User.findByIdAndUpdate(userId, { $push: { bookings, newBooking } });
-  await newBooking.populate("room").populate("author");
+  await newBooking.populate("room");
+  await newBooking.populate("author");
 
   return newBooking;
 }
@@ -39,6 +40,9 @@ function updateBooking(id, bookingData) {
 }
 
 //get user bookings
+async function getUserBookings(userId) {
+  return Booking.find({ author: userId }).populate("author").populate("room");
+}
 
 module.exports = {
   addBooking,
@@ -46,4 +50,5 @@ module.exports = {
   getStatuses,
   updateBooking,
   deleteBooking,
+  getUserBookings,
 };

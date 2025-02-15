@@ -12,6 +12,7 @@ const {
   updateBooking,
   deleteBooking,
   addBooking,
+  getUserBookings,
 } = require("./controllers/booking");
 const { getRooms, addRoom, getRoom } = require("./controllers/room");
 
@@ -102,6 +103,12 @@ app.post("/rooms/:id/booking", async (req, res) => {
 
 app.get("/bookings", hasRole([ROLES.ADMIN]), async (req, res) => {
   const bookings = await getBookings();
+
+  res.send({ data: bookings });
+});
+
+app.get("/bookings/my", async (req, res) => {
+  const bookings = await getUserBookings(req.user.id);
 
   res.send({ data: bookings });
 });
