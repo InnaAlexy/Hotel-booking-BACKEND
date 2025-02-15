@@ -83,17 +83,22 @@ app.get("/users", hasRole([ROLES.ADMIN]), async (req, res) => {
   res.send({ data: users.map(mapUser) });
 });
 
-//////////////BOOKINGS////////////
-// app.post("/bookings", hasRole([ROLES.ADMIN, ROLES.GEST]), async (req, res) => {
-//   const room = await addBooking({
-//     room: req.body.title,
-//     author: req.body.imgUrl,
-//     date: req.body.content,
+// app.get("/users/:id", hasRole([ROLES.ADMIN]), async (req, res) => {
+//   const user = await getUser(req.params.id);
 
-//   });
-
-//   res.send({ data: room });
+//   res.send({ data: user });
 // });
+
+//////////////BOOKINGS////////////
+app.post("/rooms/:id/booking", async (req, res) => {
+  const newBooking = await addBooking({
+    room: req.params.id,
+    author: req.user.id,
+    date: req.body.date,
+  });
+
+  res.send({ data: newBooking });
+});
 
 app.get("/bookings", hasRole([ROLES.ADMIN]), async (req, res) => {
   const bookings = await getBookings();

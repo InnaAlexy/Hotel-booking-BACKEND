@@ -1,9 +1,15 @@
 const Booking = require("../models/Booking");
 const STATUS = require("../constants/statuses");
+const User = require("../models/User");
 
 //add
-function addBooking(booking) {
-  return Booking.create(booking);
+async function addBooking(booking) {
+  const newBooking = await Booking.create(booking);
+
+  // await User.findByIdAndUpdate(userId, { $push: { bookings, newBooking } });
+  await newBooking.populate("room").populate("author");
+
+  return newBooking;
 }
 
 //delete
@@ -13,7 +19,7 @@ function deleteBooking(id) {
 
 //get list
 function getBookings() {
-  return Booking.find();
+  return Booking.find().populate("author").populate("room");
 }
 
 //get statuses

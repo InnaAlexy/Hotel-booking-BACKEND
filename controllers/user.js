@@ -33,6 +33,11 @@ function getUsers() {
   return User.find();
 }
 
+// //get user
+// function getUser(id) {
+//   return User.findById(id);
+// }
+
 //get roles
 // function getRoles() {
 //   return [
