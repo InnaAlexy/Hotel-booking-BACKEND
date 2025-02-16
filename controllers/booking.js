@@ -36,13 +36,17 @@ function getStatuses() {
 function updateBooking(id, bookingData) {
   return Booking.findByIdAndUpdate(id, bookingData, {
     returnDocument: "after",
-  });
+  })
+    .populate("author")
+    .populate("room");
 }
 
 //get user bookings
 async function getUserBookings(userId) {
   return Booking.find({ author: userId }).populate("author").populate("room");
 }
+
+//8 урок 7:03
 
 module.exports = {
   addBooking,

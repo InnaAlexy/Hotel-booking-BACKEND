@@ -33,10 +33,10 @@ function getUsers() {
   return User.find();
 }
 
-// //get user
-// function getUser(id) {
-//   return User.findById(id);
-// }
+//get user
+function getUser(id) {
+  return User.findById(id);
+}
 
 //get roles
 // function getRoles() {
@@ -56,4 +56,5 @@ module.exports = {
   register,
   login,
   getUsers,
+  getUser,
 };
