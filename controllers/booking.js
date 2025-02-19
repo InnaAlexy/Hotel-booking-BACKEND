@@ -46,8 +46,6 @@ async function getUserBookings(userId) {
   return Booking.find({ author: userId }).populate("author").populate("room");
 }
 
-//8 урок 7:03
-
 module.exports = {
   addBooking,
   getBookings,
